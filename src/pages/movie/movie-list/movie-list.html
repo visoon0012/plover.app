@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons start>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <!-- <ion-buttons end>
+      <button ion-button (click)="goSearch()">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons> -->
+    <ion-segment [(ngModel)]="config.type">
+      <ion-segment-button value="movie" (click)="changeType('movie')">
+        电影
+      </ion-segment-button>
+      <ion-segment-button value="tv" (click)="changeType('tv')">
+        电视剧
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-segment padding *ngIf="config.type == 'movie'" [(ngModel)]="config.tag">
+      <ion-segment-button *ngFor="let tag of tags['movie']" [value]="tag['tag']" (click)="changeTag(tag['name'])">
+        {{tag['name']}}
+      </ion-segment-button>
+    </ion-segment>
+    <ion-segment padding *ngIf="config.type == 'tv'" [(ngModel)]="config.tag">
+      <ion-segment-button *ngFor="let tag of tags['tv']" [value]="tag['tag']" (click)="changeTag(tag['name'])">
+        {{tag['name']}}
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!--下拉刷新-->
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingText="立即刷新" refreshingSpinner="circles" refreshingText="正在刷新数据...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <div>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6 *ngFor="let item of list">
+          <movie-card [item]="item" [width]='imgSize.width' [height]='imgSize.height'></movie-card>
+        </ion-col>
+        <ion-col col-6 id="ion-col-width" *ngIf="imgSize.width==0"></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <!--上拉加载-->
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="config.next!=null">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

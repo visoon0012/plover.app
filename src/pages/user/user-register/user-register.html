@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      注册
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list style="margin-bottom:0">
+    <ion-item>
+      <ion-label stacked>千鸟帐号/手机号</ion-label>
+      <ion-input type="text" [(ngModel)]="registerData.username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>邮箱</ion-label>
+      <ion-input type="text" [(ngModel)]="registerData.email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>密码</ion-label>
+      <ion-input type="password" [(ngModel)]="registerData.password"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>密码(再输入一次)</ion-label>
+      <ion-input type="password" [(ngModel)]="registerData.password2"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <div padding>
+    <button ion-button block (click)="register()">注册</button>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons start>
+      <button ion-button icon-left color="primary" (click)="goLogin()">
+        <ion-icon name="ios-log-in-outline"></ion-icon>
+        登录
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-right color="primary" (click)="goForgot()">
+        忘记密码
+        <ion-icon name="ios-help-circle-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

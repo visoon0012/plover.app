@@ -1,0 +1,16 @@
+movie-card {
+    .card-ios {
+        width: auto;
+    }
+    .card-content-ios {
+        padding: 10px;
+    }
+    ion-card img {
+        display: block;
+        width: 100%;
+        min-height: 190px;
+    }
+    .line-height {
+        height: 2.8em;
+    }
+}

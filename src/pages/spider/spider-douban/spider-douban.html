@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>我的</ion-title>
+  </ion-navbar>
+  <ion-toolbar>
+    <ion-buttons start>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-segment [(ngModel)]="config.type">
+      <ion-segment-button value="movie">
+        电影
+      </ion-segment-button>
+      <ion-segment-button value="tv">
+        电视剧
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-segment padding *ngIf="config.type == 'movie'" [(ngModel)]="config.tag">
+      <ion-segment-button *ngFor="let tag of tags['movie']" [value]="tag['tag']">
+        {{tag['name']}}
+      </ion-segment-button>
+    </ion-segment>
+    <ion-segment padding *ngIf="config.type == 'tv'" [(ngModel)]="config.tag">
+      <ion-segment-button *ngFor="let tag of tags['tv']" [value]="tag['tag']">
+        {{tag['name']}}
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!--下拉刷新-->
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingText="立即刷新" refreshingSpinner="circles" refreshingText="正在刷新数据...">
+    </ion-refresher-content>
+  </ion-refresher>
+</ion-content>

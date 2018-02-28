@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      详情与资源
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="app-bg">
+  <!--底部色块-->
+  <div *ngIf="item">
+    <ion-card>
+      <ion-card-header>
+        {{item['title']}}
+      </ion-card-header>
+      <img [src]="item['images']['large']">
+      <ion-list>
+        <ion-card-content class="padding-vertical">
+          <p>{{item['summary']}}</p>
+        </ion-card-content>
+      </ion-list>
+      <ion-row>
+        <ion-col>
+          <button ion-button icon-left clear small>
+            <ion-icon name="heart"></ion-icon>
+            <div>豆瓣{{item['rating']['average']}}分</div>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-left clear small>
+            <ion-icon name="stats"></ion-icon>
+            <div>{{item['ratings_count']}} 评</div>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-left clear small>
+            <ion-icon name="play"></ion-icon>
+            <div>{{resources.length}} 资源</div>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+    <div *ngIf="resources.length > 0">
+      <ion-card>
+        <ion-card-header>
+          点击复制资源链接(先锋影音直接播放)
+        </ion-card-header>
+      </ion-card>
+      <div *ngFor="let resource of resources;">
+        <movie-resource [resource]="resource"></movie-resource>
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,20 @@
+<ion-card no-padding no-margin (click)="goMovie(item)">
+  <img [src]="item['cover']" [width]="width" [height]="height">
+  <ion-card-content>
+    <p class="line-height">{{item['title']}}</p>
+  </ion-card-content>
+  <ion-row>
+    <ion-col>
+      <button ion-button icon-left clear small>
+        <ion-icon name="ribbon"></ion-icon>
+        <div>{{item['rate']}}</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button icon-left clear small>
+        <ion-icon name="cloud-download"></ion-icon>
+        <div>{{item['resources'].length}}</div>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-card>
