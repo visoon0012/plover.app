@@ -2,6 +2,7 @@
 
     Plover app for Android and IOS
     采用 IONIC3 + Cordova
+    是plover.cloud的前端应用
 
 ## 启动项目
 
