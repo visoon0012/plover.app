@@ -3,6 +3,7 @@
     Plover app for Android and IOS
     采用 IONIC3 + Cordova
     是plover.cloud的前端应用
+    目前提供 豆瓣电影信息预览+关联资源下载、资源搜索
     
 ## 项目准备
   
