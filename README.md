@@ -1,4 +1,9 @@
-# 启动项目
+# 项目简介
+
+    Plover app for Android and IOS
+    采用 IONIC3 + Cordova
+
+## 启动项目
 
     ionic serve --address 0.0.0.0 --port 8101 --livereload-port 35730 --dev-logger-port 53704 --no-open
 
