@@ -1,14 +1,14 @@
-## 项目简介
+# 项目简介
 
     Plover app for Android and IOS
     采用 IONIC3 + Cordova
     是plover.cloud的前端应用
-    目前提供 豆瓣电影信息预览+关联资源下载、资源搜索
-    
+    目前提供 豆瓣电影信息预览与关联资源下载、资源搜索、唤起后台爬虫
+
 ## 项目准备
-  
+
 ### 安装环境
-  
+
     在项目目录中执行：
     npm install -g ionic cordova
     npm install
