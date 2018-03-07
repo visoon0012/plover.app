@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {
-  IonicPage,
   NavController,
   AlertController,
   ToastController,
@@ -9,6 +8,9 @@ import {
   LoadingController
 } from 'ionic-angular';
 import {Clipboard} from '@ionic-native/clipboard';
+import {AppVersion} from '@ionic-native/app-version';
+import {InAppBrowser} from '@ionic-native/in-app-browser';
+
 import {PloverService} from "../services/plover.service";
 
 @Component({
@@ -26,11 +28,42 @@ export class Base {
               public navCtrl: NavController,
               public modalCtrl: ModalController,
               public clipboard: Clipboard,
+              public appVersion: AppVersion,
+              public iab: InAppBrowser,
               public service: PloverService) {
   }
 
   sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  checkUpdate() {
+    this.service.http.get('http://www.plover.cloud/version.json', {}).subscribe(
+      data => {
+        this.appVersion.getVersionCode().then(version => {
+          if (Number(version) < Number(data['VersionCode'])) {
+            let prompt = this.alertCtrl.create({
+              title: '版本更新',
+              message: '您有新的版本，请点击确定下载更新',
+              buttons: [
+                {
+                  text: '确定',
+                  handler: data => {
+                    const browser = this.iab.create('http://www.plover.cloud/plover.apk', '_system');
+                  }
+                }
+              ]
+            });
+            prompt.present();
+          } else {
+            // this.presentToast('您已经是最新版本了，不需要进行更新');
+          }
+        });
+      },
+      error => {
+        this.presentToast('发生错误');
+      }
+    );
   }
 
   copy(str) {
@@ -62,7 +95,7 @@ export class Base {
   showLoading(message) {
     this.loading = this.loadingCtrl.create({
       content: message,
-      duration: 3000
+      duration: 30000
     });
     this.loading.present();
   }

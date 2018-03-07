@@ -13,6 +13,7 @@ export class MovieSearchPage extends Base {
 
   movie_list: any = [];
   resource_list: any = [];
+  resource_source = '0';
   resource_new = {
     items: [],
     next: '',
@@ -28,6 +29,10 @@ export class MovieSearchPage extends Base {
   }
 
   search(ev: any) {
+    if (this.page == 'new') {
+      this.presentToast('最新资源不支持搜索');
+      return;
+    }
     if (this.keywords == '') {
       return;
     }

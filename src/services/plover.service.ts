@@ -40,5 +40,7 @@ export class PloverService {
     headers.set('Authorization', token);
     return this.http.get(url, {headers: headers});
   }
+
+
 }
 

@@ -9,6 +9,8 @@ import {PloverAuthInterceptor} from '../services/plover.interceptor';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {PloverService} from '../services/plover.service';
 import {Clipboard} from "@ionic-native/clipboard";
+import {AppVersion} from '@ionic-native/app-version';
+import {InAppBrowser} from '@ionic-native/in-app-browser';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import {Clipboard} from "@ionic-native/clipboard";
     SplashScreen,
     PloverService,
     Clipboard,
+    AppVersion,
+    InAppBrowser,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: PloverAuthInterceptor,

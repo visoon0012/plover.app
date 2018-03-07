@@ -17,6 +17,14 @@
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar color="primary"
+                   (ionInput)="search($event)"
+                   debounce="3000"
+                   placeholder="输入后3秒执行搜索"
+                   [(ngModel)]="keywords">
+    </ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content class="app-bg">
@@ -29,10 +37,6 @@
       <ion-infinite-scroll-content></ion-infinite-scroll-content>
     </ion-infinite-scroll>
   </div>
-  <ion-toolbar *ngIf="page!='new'">
-    <ion-searchbar color="primary" (ionInput)="search($event)" debounce="3000" placeholder="输入后3秒执行搜索"
-                   [(ngModel)]="keywords"></ion-searchbar>
-  </ion-toolbar>
   <div *ngIf="page=='movie'">
     <ion-card>
       <ion-card-content>
@@ -49,13 +53,25 @@
     </ion-grid>
   </div>
   <div *ngIf="page=='resource'">
-    <ion-card>
-      <ion-card-content>
-        <p>共 {{resource_list.length}} 条</p>
-      </ion-card-content>
-    </ion-card>
-    <div *ngFor="let item of resource_list">
-      <movie-resource [resource]='item'></movie-resource>
+    <div padding *ngIf="resource_list.length>0">
+      <ion-segment [(ngModel)]="resource_source">
+        <ion-segment-button *ngFor="let items of resource_list;let i = index;" [value]="i.toString()">
+          来源{{i}}
+        </ion-segment-button>
+        <ion-segment-button disabled="disabled">
+          预留
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+    <div *ngIf="resource_list[resource_source]">
+      <ion-card>
+        <ion-card-content>
+          <p>共 {{resource_list[resource_source].length}} 条</p>
+        </ion-card-content>
+      </ion-card>
+      <div *ngFor="let item of resource_list[resource_source]">
+        <movie-resource [resource]='item'></movie-resource>
+      </div>
     </div>
   </div>
 </ion-content>

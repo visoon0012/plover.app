@@ -58,6 +58,7 @@ export class MovieListPage extends Base {
 
   ionViewDidLoad() {
     this.getInfo();
+    this.checkUpdate();
   }
 
   getInfo() {
