@@ -1,8 +1,6 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController, ToastController, ModalController } from 'ionic-angular';
-import { Base } from '../../base';
-import { PloverService } from '../../../services/plover.service';
-import { Clipboard } from '@ionic-native/clipboard';
+import {Component} from '@angular/core';
+import {IonicPage} from 'ionic-angular';
+import {Base} from '../../base';
 
 
 @IonicPage()
@@ -19,39 +17,28 @@ export class SpiderDoubanPage extends Base {
 
   tags = {
     movie: [
-      { type: 'movie', tag: '热门', name: '热门' },
-      { type: 'movie', tag: '最新', name: '最新' },
-      { type: 'movie', tag: '经典', name: '经典' },
-      { type: 'movie', tag: '豆瓣高分', name: '高分' },
-      { type: 'movie', tag: '动作', name: '动作' },
-      { type: 'movie', tag: '喜剧', name: '喜剧' },
-      { type: 'movie', tag: '爱情', name: '爱情' },
-      { type: 'movie', tag: '科幻', name: '科幻' },
-      { type: 'movie', tag: '悬疑', name: '悬疑' },
-      { type: 'movie', tag: '恐怖', name: '恐怖' },
+      {type: 'movie', tag: '热门', name: '热门'},
+      {type: 'movie', tag: '最新', name: '最新'},
+      {type: 'movie', tag: '经典', name: '经典'},
+      {type: 'movie', tag: '豆瓣高分', name: '高分'},
+      {type: 'movie', tag: '动作', name: '动作'},
+      {type: 'movie', tag: '喜剧', name: '喜剧'},
+      {type: 'movie', tag: '爱情', name: '爱情'},
+      {type: 'movie', tag: '科幻', name: '科幻'},
+      {type: 'movie', tag: '悬疑', name: '悬疑'},
+      {type: 'movie', tag: '恐怖', name: '恐怖'},
     ],
     tv: [
-      { type: 'tv', tag: '热门', name: '热门' },
-      { type: 'tv', tag: '美剧', name: '美剧' },
-      { type: 'tv', tag: '英剧', name: '英剧' },
-      { type: 'tv', tag: '韩剧', name: '韩剧' },
-      { type: 'tv', tag: '日剧', name: '日剧' },
-      { type: 'tv', tag: '国产剧', name: '国剧' },
-      { type: 'tv', tag: '港剧', name: '港剧' },
-      { type: 'tv', tag: '日本动画', name: '动漫' },
-      { type: 'tv', tag: '综艺', name: '综艺' },]
+      {type: 'tv', tag: '热门', name: '热门'},
+      {type: 'tv', tag: '美剧', name: '美剧'},
+      {type: 'tv', tag: '英剧', name: '英剧'},
+      {type: 'tv', tag: '韩剧', name: '韩剧'},
+      {type: 'tv', tag: '日剧', name: '日剧'},
+      {type: 'tv', tag: '国产剧', name: '国剧'},
+      {type: 'tv', tag: '港剧', name: '港剧'},
+      {type: 'tv', tag: '日本动画', name: '动漫'},
+      {type: 'tv', tag: '综艺', name: '综艺'},]
   };
-
-  constructor(
-    public ps: PloverService,
-    public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController,
-    public toastCtrl: ToastController,
-    public navCtrl: NavController,
-    public clipboard: Clipboard,
-    public modalCtrl: ModalController, ) {
-    super(loadingCtrl, alertCtrl, toastCtrl, navCtrl, modalCtrl, clipboard);
-  }
 
   updateMovieList() {
     let loader = this.loadingCtrl.create({
@@ -59,13 +46,14 @@ export class SpiderDoubanPage extends Base {
       duration: 30 * 1000
     });
     loader.present();
-    let url = this.ps.api.movie_simple_spider + `?type=${this.config.type}&tag=${this.config.tag}`;
-    this.ps.http.get(url).subscribe(
+    let url = this.service.api.movie_simple_spider + `?type=${this.config.type}&tag=${this.config.tag}`;
+    this.service.http.get(url).subscribe(
       (data) => {
         loader.dismiss();
         this.showAlert('提示', '更新完毕');
       },
-      (error) => { }
+      (error) => {
+      }
     );
   }
 

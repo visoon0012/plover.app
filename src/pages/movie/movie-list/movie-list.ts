@@ -1,10 +1,11 @@
-import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController, ToastController, ModalController, Content } from 'ionic-angular';
-import { Clipboard } from '@ionic-native/clipboard';
-import { Base } from '../../base';
-import { PloverService } from '../../../services/plover.service';
-import { MovieDetailPage } from '../movie-detail/movie-detail';
-import { MovieSearchPage } from '../movie-search/movie-search';
+import {Component, ViewChild} from '@angular/core';
+import {
+  IonicPage,
+  Content
+} from 'ionic-angular';
+import {MovieDetailPage} from '../movie-detail/movie-detail';
+import {MovieSearchPage} from '../movie-search/movie-search';
+import {Base} from "../../base";
 
 
 @IonicPage()
@@ -19,27 +20,27 @@ export class MovieListPage extends Base {
 
   tags = {
     movie: [
-      { type: 'movie', tag: '热门', name: '热门' },
-      { type: 'movie', tag: '最新', name: '最新' },
-      { type: 'movie', tag: '经典', name: '经典' },
-      { type: 'movie', tag: '豆瓣高分', name: '高分' },
-      { type: 'movie', tag: '动作', name: '动作' },
-      { type: 'movie', tag: '喜剧', name: '喜剧' },
-      { type: 'movie', tag: '爱情', name: '爱情' },
-      { type: 'movie', tag: '科幻', name: '科幻' },
-      { type: 'movie', tag: '悬疑', name: '悬疑' },
-      { type: 'movie', tag: '恐怖', name: '恐怖' },
+      {type: 'movie', tag: '热门', name: '热门'},
+      {type: 'movie', tag: '最新', name: '最新'},
+      {type: 'movie', tag: '经典', name: '经典'},
+      {type: 'movie', tag: '豆瓣高分', name: '高分'},
+      {type: 'movie', tag: '动作', name: '动作'},
+      {type: 'movie', tag: '喜剧', name: '喜剧'},
+      {type: 'movie', tag: '爱情', name: '爱情'},
+      {type: 'movie', tag: '科幻', name: '科幻'},
+      {type: 'movie', tag: '悬疑', name: '悬疑'},
+      {type: 'movie', tag: '恐怖', name: '恐怖'},
     ],
     tv: [
-      { type: 'tv', tag: '热门', name: '热门' },
-      { type: 'tv', tag: '美剧', name: '美剧' },
-      { type: 'tv', tag: '英剧', name: '英剧' },
-      { type: 'tv', tag: '韩剧', name: '韩剧' },
-      { type: 'tv', tag: '日剧', name: '日剧' },
-      { type: 'tv', tag: '国产剧', name: '国剧' },
-      { type: 'tv', tag: '港剧', name: '港剧' },
-      { type: 'tv', tag: '日本动画', name: '动漫' },
-      { type: 'tv', tag: '综艺', name: '综艺' },]
+      {type: 'tv', tag: '热门', name: '热门'},
+      {type: 'tv', tag: '美剧', name: '美剧'},
+      {type: 'tv', tag: '英剧', name: '英剧'},
+      {type: 'tv', tag: '韩剧', name: '韩剧'},
+      {type: 'tv', tag: '日剧', name: '日剧'},
+      {type: 'tv', tag: '国产剧', name: '国剧'},
+      {type: 'tv', tag: '港剧', name: '港剧'},
+      {type: 'tv', tag: '日本动画', name: '动漫'},
+      {type: 'tv', tag: '综艺', name: '综艺'},]
   };
 
   list = [];
@@ -55,14 +56,7 @@ export class MovieListPage extends Base {
     height: 0,
   };
 
-  constructor(public ps: PloverService,
-    public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController,
-    public toastCtrl: ToastController,
-    public navCtrl: NavController,
-    public clipboard: Clipboard,
-    public modalCtrl: ModalController, ) {
-    super(loadingCtrl, alertCtrl, toastCtrl, navCtrl, modalCtrl, clipboard);
+  ionViewDidLoad() {
     this.getInfo();
   }
 
@@ -75,12 +69,12 @@ export class MovieListPage extends Base {
     if (this.config.next == null) {
       let type = this.config.type;
       let tag = this.config.tag;
-      url = this.ps.api.movie_simple + `?douban_type=${type}&douban_tag=${tag}`;
+      url = this.service.api.movie_simple + `?douban_type=${type}&douban_tag=${tag}`;
     } else {
       url = this.config.next;
       this.config.next = '';
     }
-    this.ps.http.get(url).subscribe(
+    this.service.http.get(url).subscribe(
       data => {
         this.config.next = data['next'];
         this.list = this.list.concat(data['results']);
@@ -110,9 +104,9 @@ export class MovieListPage extends Base {
   getImg() {
     for (let i in this.list) {
       if (this.list[i]['cover'].indexOf('doubanio') != -1) {
-        this.ps.http.post(this.ps.api.movie_image, { url: this.list[i]['cover'] }).subscribe(
+        this.service.http.post(this.service.api.movie_image, {url: this.list[i]['cover']}).subscribe(
           data => {
-            this.list[i]['cover'] = this.ps.plover_img + data['image_url'].substring(8);
+            this.list[i]['cover'] = this.service.plover_img + data['image_url'].substring(8);
           },
           error => {
           }

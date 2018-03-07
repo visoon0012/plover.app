@@ -1,8 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController, ToastController, ModalController, Content } from 'ionic-angular';
-import { Clipboard } from '@ionic-native/clipboard';
-import { Base } from '../../base';
-import { PloverService } from '../../../services/plover.service';
+import {Component} from '@angular/core';
+import {
+  IonicPage,
+} from 'ionic-angular';
+import {Base} from '../../base';
 
 @IonicPage()
 @Component({
@@ -17,36 +17,29 @@ export class MovieDetailPage extends Base {
     'rating': {}
   };
   resources: any = [];
-  constructor(
-    public navParams: NavParams,
-    public ps: PloverService,
-    public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController,
-    public toastCtrl: ToastController,
-    public navCtrl: NavController,
-    public clipboard: Clipboard,
-    public modalCtrl: ModalController, ) {
-    super(loadingCtrl, alertCtrl, toastCtrl, navCtrl, modalCtrl, clipboard);
+  resources_source = '0';
+
+  ionViewDidLoad() {
     this.douban_id = this.navParams.get('douban_id');
     this.getInfo();
   }
 
   getInfo() {
-    let url = this.ps.api.movie + `1/?douban_id=${this.douban_id}`;
-    this.ps.http.get(url).subscribe(
+    let url = this.service.api.movie + `1/?douban_id=${this.douban_id}`;
+    this.service.http.get(url).subscribe(
       (data) => {
         this.item = data;
         // 获取图片
-        // this.ps.http.post(this.ps.api.movie_image, { url: this.item['images']['large'] }).subscribe(
+        // this.service.http.post(this.service.api.movie_image, { url: this.item['images']['large'] }).subscribe(
         //   data => {
-        //     this.item['images']['large'] = this.ps.plover_img + data['image_url'].substring(8);
+        //     this.item['images']['large'] = this.service.plover_img + data['image_url'].substring(8);
         //   },
         //   error => {
         //   }
         // );
         // 获取资源
-        url = this.ps.api.movie_resource_search + `?keywords=${data['title']}`;
-        this.ps.http.get(url).subscribe(
+        url = this.service.api.movie_resource_search + `?keywords=${data['title']}`;
+        this.service.http.get(url).subscribe(
           (data) => {
             this.resources = data;
           },

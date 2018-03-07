@@ -5,34 +5,13 @@
 </ion-header>
 
 <ion-content>
-  <!--下拉刷新-->
-  <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content pullingText="立即刷新" refreshingSpinner="circles" refreshingText="正在刷新数据...">
-    </ion-refresher-content>
-  </ion-refresher>
   <!-- 选择 -->
-  <div *ngIf="movie.detailItems.length==0">
-    <ion-list>
-      <button ion-item *ngFor="let item of movie.spiderItems" (click)="itemSelected(item)">
-        {{ item.name }}
-      </button>
-    </ion-list>
-  </div>
-  <div *ngIf="movie.detailItems.length!=0">
-    <div padding>
-      <button ion-button icon-left color="light" (click)="clearDetailItems()">
-        <ion-icon name="arrow-back"></ion-icon>
-        返回
-      </button>
-      <button ion-button icon-right (click)="AutoStart()">
-        自动处理
-        <ion-icon name="arrow-forward"></ion-icon>
-      </button>
-    </div>
-    <ion-list>
-      <button ion-item *ngFor="let item of movie.detailItems" (click)="processingMovieDetail(item)">
-        {{ item['title'] }}
-      </button>
-    </ion-list>
-  </div>
+  <ion-list>
+    <button ion-item (click)="processingMovieList()">
+      后台获取新的电影资源页
+    </button>
+    <button ion-item (click)="processingMovieDetail()">
+      后台处理新的电影资源页
+    </button>
+  </ion-list>
 </ion-content>

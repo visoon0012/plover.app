@@ -35,7 +35,7 @@
         <ion-col>
           <button ion-button icon-left clear small>
             <ion-icon name="play"></ion-icon>
-            <div>{{resources.length}} 资源</div>
+            <div>{{resources.length}} 资源来源</div>
           </button>
         </ion-col>
       </ion-row>
@@ -46,7 +46,17 @@
           点击复制资源链接(先锋影音直接播放)
         </ion-card-header>
       </ion-card>
-      <div *ngFor="let resource of resources;">
+      <div padding>
+        <ion-segment [(ngModel)]="resources_source">
+          <ion-segment-button *ngFor="let items of resources;let i = index;" [value]="i.toString()">
+            来源{{i}}
+          </ion-segment-button>
+          <ion-segment-button disabled="disabled">
+            预留
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+      <div *ngFor="let resource of resources[resources_source];">
         <movie-resource [resource]="resource"></movie-resource>
       </div>
     </div>

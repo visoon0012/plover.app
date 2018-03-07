@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController, ToastController, ModalController } from 'ionic-angular';
-import { PloverService } from '../../../services/plover.service';
-import { Clipboard } from '@ionic-native/clipboard';
+import { IonicPage} from 'ionic-angular';
 import { Base } from '../../base';
 import { tokenNotExpired } from 'angular2-jwt';
 
@@ -14,17 +12,6 @@ import { tokenNotExpired } from 'angular2-jwt';
 export class UserCenterPage extends Base {
 
   user = {};
-
-  constructor(
-    public ps: PloverService,
-    public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController,
-    public toastCtrl: ToastController,
-    public navCtrl: NavController,
-    public clipboard: Clipboard,
-    public modalCtrl: ModalController, ) {
-    super(loadingCtrl, alertCtrl, toastCtrl, navCtrl, modalCtrl, clipboard);
-  }
 
   ionViewDidLoad() {
     this.checkAuth();

@@ -1,8 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController, ToastController, ModalController } from 'ionic-angular';
-import { Clipboard } from '@ionic-native/clipboard';
-import { Base } from '../../base';
-import { PloverService } from '../../../services/plover.service';
+import {Component} from '@angular/core';
+import {
+  IonicPage,
+} from 'ionic-angular';
+import {Base} from '../../base';
 
 @IonicPage()
 @Component({
@@ -23,14 +23,7 @@ export class MovieSearchPage extends Base {
 
   keywords = '';
 
-  constructor(public ps: PloverService,
-    public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController,
-    public toastCtrl: ToastController,
-    public navCtrl: NavController,
-    public clipboard: Clipboard,
-    public modalCtrl: ModalController, ) {
-    super(loadingCtrl, alertCtrl, toastCtrl, navCtrl, modalCtrl, clipboard);
+  ionViewDidLoad() {
     this.getNew();
   }
 
@@ -40,8 +33,8 @@ export class MovieSearchPage extends Base {
     }
     this.showLoading('正在加载中...');
     if (this.page == 'movie') {
-      let url = this.ps.api.movie_search + `?keywords=${this.keywords}`;
-      this.ps.http.get(url).subscribe(
+      let url = this.service.api.movie_search + `?keywords=${this.keywords}`;
+      this.service.http.get(url).subscribe(
         data => {
           this.movie_list = data;
           this.changeImgHeight(this.movie_list);
@@ -54,8 +47,8 @@ export class MovieSearchPage extends Base {
       );
     }
     else if (this.page == 'resource') {
-      let url = this.ps.api.movie_resource_search + `?keywords=${this.keywords}`;
-      this.ps.http.get(url).subscribe(
+      let url = this.service.api.movie_resource_search + `?keywords=${this.keywords}`;
+      this.service.http.get(url).subscribe(
         data => {
           this.resource_list = data;
           this.hideLoading();
@@ -66,18 +59,19 @@ export class MovieSearchPage extends Base {
         }
       );
     }
-    else if (this.page == 'bt') { }
+    else if (this.page == 'bt') {
+    }
   }
 
   getNew() {
     let url = '';
     if (this.resource_new.next == '') {
-      url = this.ps.api.movie_resource;
+      url = this.service.api.movie_resource;
     }
     else {
       url = this.resource_new.next;
     }
-    this.ps.http.get(url).subscribe(
+    this.service.http.get(url).subscribe(
       data => {
         this.resource_new.items = this.resource_new.items.concat(data['results']);
         this.resource_new.next = data['next'];

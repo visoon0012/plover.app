@@ -1,13 +1,4 @@
 <ion-header>
-
-  <ion-navbar>
-    <ion-buttons start>
-      <button ion-button icon-only>
-        <ion-icon name="cloud"></ion-icon>
-      </button>
-    </ion-buttons>
-    <span style="margin-left: 1rem;color: #488aff;">资源与搜索</span>
-  </ion-navbar>
   <ion-toolbar>
     <!-- <ion-buttons start>
       <button ion-button menuToggle>
@@ -18,14 +9,11 @@
       <ion-segment-button value="new" (click)="getNew()">
         最新资源
       </ion-segment-button>
-      <!-- <ion-segment-button value="movie">
+      <ion-segment-button value="movie">
         影片
-      </ion-segment-button> -->
-      <ion-segment-button value="resource">
-        资源
       </ion-segment-button>
-      <ion-segment-button value="BT">
-        BT
+      <ion-segment-button value="resource">
+        搜索
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
@@ -42,7 +30,8 @@
     </ion-infinite-scroll>
   </div>
   <ion-toolbar *ngIf="page!='new'">
-    <ion-searchbar color="primary" (ionInput)="search($event)" debounce="3000" placeholder="输入后3秒执行搜索" [(ngModel)]="keywords"></ion-searchbar>
+    <ion-searchbar color="primary" (ionInput)="search($event)" debounce="3000" placeholder="输入后3秒执行搜索"
+                   [(ngModel)]="keywords"></ion-searchbar>
   </ion-toolbar>
   <div *ngIf="page=='movie'">
     <ion-card>

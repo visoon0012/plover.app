@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {
   IonicPage,
   NavController,
@@ -8,24 +8,25 @@ import {
   ModalController,
   LoadingController
 } from 'ionic-angular';
-import { Clipboard } from '@ionic-native/clipboard';
-// import { Login } from './user/auth/login';
+import {Clipboard} from '@ionic-native/clipboard';
+import {PloverService} from "../services/plover.service";
 
 @Component({
   selector: 'page-base',
-  template: `
-    <div>base</div>`,
+  template: '<div>Loading...</div>',
 })
 export class Base {
 
   public loading = null;
 
-  constructor(public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController,
-    public toastCtrl: ToastController,
-    public navCtrl: NavController,
-    public modalCtrl: ModalController,
-    public clipboard: Clipboard, ) {
+  constructor(public navParams: NavParams,
+              public loadingCtrl: LoadingController,
+              public alertCtrl: AlertController,
+              public toastCtrl: ToastController,
+              public navCtrl: NavController,
+              public modalCtrl: ModalController,
+              public clipboard: Clipboard,
+              public service: PloverService) {
   }
 
   sleep(ms: number) {

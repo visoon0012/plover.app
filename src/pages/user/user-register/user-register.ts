@@ -1,13 +1,11 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController, ToastController, ModalController } from 'ionic-angular';
-import { Base } from '../../base';
-import { PloverService } from '../../../services/plover.service';
-import { Clipboard } from '@ionic-native/clipboard';
+import {Component} from '@angular/core';
+import {IonicPage} from 'ionic-angular';
+import {Base} from '../../base';
 
 /**
  * Generated class for the UserRegisterPage page.
  *
- * See https://ionicframework.com/docs/components/#navigation for more info on
+ * See httservice://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
 
@@ -24,16 +22,6 @@ export class UserRegisterPage extends Base {
     password2: '',
     email: ''
   };
-  constructor(
-    public ps: PloverService,
-    public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController,
-    public toastCtrl: ToastController,
-    public navCtrl: NavController,
-    public clipboard: Clipboard,
-    public modalCtrl: ModalController, ) {
-    super(loadingCtrl, alertCtrl, toastCtrl, navCtrl, modalCtrl, clipboard);
-  }
 
   /**
    * 注册
@@ -56,7 +44,7 @@ export class UserRegisterPage extends Base {
       return;
     }
     this.showLoading('正在注册，请稍后...');
-    this.ps.http.post(this.ps.api.user, this.registerData).subscribe(
+    this.service.http.post(this.service.api.user, this.registerData).subscribe(
       data => {
         this.hideLoading();
         localStorage['token'] = data['token'];

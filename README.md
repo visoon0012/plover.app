@@ -23,7 +23,7 @@
 
 ## 签名
 
-    jarsigner -verbose -keystore android.keystore -signedjar platforms/android/app/build/outputs/apk/release/plover.apk platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk  android.keystore
+    jarsigner -verbose -keystore plovercloud.keystore -signedjar platforms/android/app/build/outputs/apk/release/plover.apk platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk  plovercloud.keystore
 
     其他：plovercloud
     密码：plovercloud.com
