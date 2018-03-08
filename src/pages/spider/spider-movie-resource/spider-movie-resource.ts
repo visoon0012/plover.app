@@ -12,7 +12,7 @@ export class SpiderMovieResourcePage extends Base {
 
   processingMovieList() {
     this.service.http.get(this.service.api.processing_index, {}).subscribe((data) => {
-      this.presentToast('更新完成');
+      this.presentToast(`新增：${data['new']}`);
     }, (error) => {
       this.presentToast('发生错误');
     });

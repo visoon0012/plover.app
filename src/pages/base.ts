@@ -43,8 +43,8 @@ export class Base {
         this.appVersion.getVersionCode().then(version => {
           if (Number(version) < Number(data['VersionCode'])) {
             let prompt = this.alertCtrl.create({
-              title: '版本更新',
-              message: '您有新的版本，请点击确定下载更新',
+              title: '有新的版本更新',
+              message: `更新内容: ${data['message']}`,
               buttons: [
                 {
                   text: '确定',

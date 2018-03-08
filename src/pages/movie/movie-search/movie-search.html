@@ -32,10 +32,6 @@
     <div *ngFor="let item of resource_new.items">
       <movie-resource [resource]='item'></movie-resource>
     </div>
-    <!--上拉加载-->
-    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="resource_new.next!=''">
-      <ion-infinite-scroll-content></ion-infinite-scroll-content>
-    </ion-infinite-scroll>
   </div>
   <div *ngIf="page=='movie'">
     <ion-card>
@@ -74,4 +70,8 @@
       </div>
     </div>
   </div>
+  <!--上拉加载-->
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="resource_new.next!=''&&page=='new'">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
