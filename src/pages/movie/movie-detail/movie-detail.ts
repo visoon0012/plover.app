@@ -21,11 +21,12 @@ export class MovieDetailPage extends Base {
 
   ionViewDidLoad() {
     this.douban_id = this.navParams.get('douban_id');
+    this.resources = this.subResources(this.navParams.data.resources);
     this.getInfo();
   }
 
   getInfo() {
-    let url = this.service.api.movie + `1/?douban_id=${this.douban_id}`;
+    let url = this.service.api.movie_detail + `?douban_id=${this.douban_id}`;
     this.service.http.get(url).subscribe(
       (data) => {
         this.item = data;
@@ -38,14 +39,15 @@ export class MovieDetailPage extends Base {
         //   }
         // );
         // 获取资源
-        url = this.service.api.movie_resource_search + `?keywords=${data['title']}`;
-        this.service.http.get(url).subscribe(
-          (data) => {
-            this.resources = data;
-          },
-          (error) => {
-          }
-        );
+        // let keywords = data['title'].split(/\[]\(\)（）{}【】'",[.]，。？?-+=!@#$%~`·/).toString().replace(',', ' ');
+        // url = this.service.api.movie_resource + `?search=${keywords}`;
+        // this.service.http.get(url).subscribe(
+        //   (data) => {
+        //     this.resources = data;
+        //   },
+        //   (error) => {
+        //   }
+        // );
       },
       (error) => {
       }

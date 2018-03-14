@@ -37,6 +37,31 @@ export class Base {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
+  subResources(resources) {
+    let source_list = [];
+    // 查询分类
+    for (let i in resources) {
+      let resource = resources[i];
+      if (source_list.indexOf(resource['source']) == -1) {
+        source_list.push(resource['source']);
+      }
+    }
+    // 按照分类添加数据
+    let items = [];
+    for (let i in source_list) {
+      let source = source_list[i];
+      let data = [];
+      for (let j in resources) {
+        let resource = resources[j];
+        if (source == resource['source']) {
+          data.push(resource);
+        }
+      }
+      items.push(data);
+    }
+    return items;
+  }
+
   checkUpdate() {
     this.service.http.get('http://www.plover.cloud/version.json', {}).subscribe(
       data => {

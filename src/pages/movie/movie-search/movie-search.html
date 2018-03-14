@@ -20,6 +20,7 @@
   <ion-toolbar>
     <ion-searchbar color="primary"
                    (ionInput)="search($event)"
+                   (ionCancel)="onCancel($event)"
                    debounce="3000"
                    placeholder="输入后3秒执行搜索"
                    [(ngModel)]="keywords">
@@ -36,12 +37,12 @@
   <div *ngIf="page=='movie'">
     <ion-card>
       <ion-card-content>
-        <p>共 {{movie_list.length}} 条</p>
+        <p>共 {{movies['count']||0}} 条</p>
       </ion-card-content>
     </ion-card>
     <ion-grid>
       <ion-row>
-        <ion-col col-6 *ngFor="let item of movie_list">
+        <ion-col col-6 *ngFor="let item of movies.results">
           <movie-card [item]="item" [width]='imgSize.width' [height]='imgSize.height'></movie-card>
         </ion-col>
         <ion-col col-6 id="ion-col-width" *ngIf="imgSize.width==0"></ion-col>
@@ -49,29 +50,17 @@
     </ion-grid>
   </div>
   <div *ngIf="page=='resource'">
-    <div padding *ngIf="resource_list.length>0">
-      <ion-segment [(ngModel)]="resource_source">
-        <ion-segment-button *ngFor="let items of resource_list;let i = index;" [value]="i.toString()">
-          来源{{i}}
-        </ion-segment-button>
-        <ion-segment-button disabled="disabled">
-          预留
-        </ion-segment-button>
-      </ion-segment>
-    </div>
-    <div *ngIf="resource_list[resource_source]">
-      <ion-card>
-        <ion-card-content>
-          <p>共 {{resource_list[resource_source].length}} 条</p>
-        </ion-card-content>
-      </ion-card>
-      <div *ngFor="let item of resource_list[resource_source]">
-        <movie-resource [resource]='item'></movie-resource>
-      </div>
+    <ion-card>
+      <ion-card-content>
+        <p>共 {{resources['count']||0}} 条</p>
+      </ion-card-content>
+    </ion-card>
+    <div *ngFor="let item of this.resources['results']">
+      <movie-resource [resource]='item'></movie-resource>
     </div>
   </div>
   <!--上拉加载-->
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="resource_new.next!=''&&page=='new'">
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

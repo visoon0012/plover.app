@@ -16,16 +16,13 @@ export class PloverService {
     'processing_detail': 'spider/movie/processing/detail/',
     // movie
     'movie_simple': 'movie_simple/',
-    'movie_search': 'movie_simple/search/',
-    'movie_image': 'movie_simple/image/',
+    'movie_simple_image': 'movie_simple/image/',
     'movie_simple_spider': 'movie_simple/spider/',
-    'movie': 'movie/',
-    'movie_resource': 'movie_resource/',
-    'movie_resource_search': 'movie_resource/search/',
 
-    'getMovieByType': 'movie/movie/search/douban/list/',
-    'getMovieDetail': 'movie/movie/search/douban/detail/',
-    'searchResourcesByKeyword': 'movie/movie/search/resources/',
+    'movie': 'movie/',
+    'movie_detail': 'movie/detail/',
+
+    'movie_resource': 'movie_resource/',
     // poem
     'getPoemsRandom': 'poem/random/',
     'getPoems': 'poem/',

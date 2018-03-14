@@ -105,7 +105,7 @@ export class MovieListPage extends Base {
   getImg() {
     for (let i in this.list) {
       if (this.list[i]['cover'].indexOf('doubanio') != -1) {
-        this.service.http.post(this.service.api.movie_image, {url: this.list[i]['cover']}).subscribe(
+        this.service.http.post(this.service.api.movie_simple_image, {url: this.list[i]['cover']}).subscribe(
           data => {
             this.list[i]['cover'] = this.service.plover_img + data['image_url'].substring(8);
           },
