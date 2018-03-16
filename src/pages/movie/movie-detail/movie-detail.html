@@ -1,63 +1,92 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      详情与资源
+      {{item['title']||'电影详情'}}
     </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="royal">
+        <ion-icon name="person-add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
+  <ion-toolbar>
+    <ion-segment padding [(ngModel)]="page">
+      <ion-segment-button value="info">
+        简介
+      </ion-segment-button>
+      <ion-segment-button value="resource">
+        资源
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content class="app-bg">
-  <!--底部色块-->
   <div *ngIf="item">
-    <ion-card>
-      <ion-card-header>
-        {{item['title']}}
-      </ion-card-header>
-      <img [src]="item['images']['large']">
-      <ion-list>
-        <ion-card-content class="padding-vertical">
-          <p>{{item['summary']}}</p>
-        </ion-card-content>
-      </ion-list>
-      <ion-row>
-        <ion-col>
-          <button ion-button icon-left clear small>
-            <ion-icon name="heart"></ion-icon>
-            <div>豆瓣{{item['rating']['average']}}分</div>
-          </button>
-        </ion-col>
-        <ion-col>
-          <button ion-button icon-left clear small>
-            <ion-icon name="stats"></ion-icon>
-            <div>{{item['ratings_count']}} 评</div>
-          </button>
-        </ion-col>
-        <ion-col>
-          <button ion-button icon-left clear small>
-            <ion-icon name="play"></ion-icon>
-            <div>{{resources.length}} 资源来源</div>
-          </button>
-        </ion-col>
-      </ion-row>
-    </ion-card>
-    <div *ngIf="resources.length > 0">
-      <ion-card>
-        <ion-card-header>
-          点击复制资源链接(先锋影音直接播放)
-        </ion-card-header>
-      </ion-card>
-      <div padding>
-        <ion-segment [(ngModel)]="resources_source">
-          <ion-segment-button *ngFor="let items of resources;let i = index;" [value]="i.toString()">
-            来源{{i}}
-          </ion-segment-button>
-          <ion-segment-button disabled="disabled">
-            预留
-          </ion-segment-button>
-        </ion-segment>
+    <div *ngIf="page=='info'">
+      <div>
+        <div class="app-bg-block-details">
+          <img [src]="item['images']['large']"/>
+        </div>
+        <div class="app-bg-block-details-block">
+        </div>
       </div>
-      <div *ngFor="let resource of resources[resources_source];">
-        <movie-resource [resource]="resource"></movie-resource>
+      <div class="introduce">
+        <div class="app-details-card-img">
+          <img [src]="item['images']['large']"/>
+        </div>
+        <ion-card class="app-details-card">
+          <ion-card-header>
+            {{item['title']}}
+          </ion-card-header>
+          <ion-list>
+            <ion-card-content class="padding-vertical">
+              <p>{{item['summary']}}</p>
+            </ion-card-content>
+          </ion-list>
+          <ion-row>
+            <ion-col>
+              <button ion-button icon-left clear small>
+                <ion-icon name="heart"></ion-icon>
+                <div>豆瓣{{item['rating']['average']}}分</div>
+              </button>
+            </ion-col>
+            <ion-col>
+              <button ion-button icon-left clear small>
+                <ion-icon name="stats"></ion-icon>
+                <div>{{item['ratings_count']}} 评</div>
+              </button>
+            </ion-col>
+            <ion-col>
+              <button ion-button icon-left clear small>
+                <ion-icon name="play"></ion-icon>
+                <div>{{resources.length}} 资源来源</div>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </div>
+    </div>
+    <div *ngIf="page=='resource'">
+      <div *ngIf="resources.length > 0">
+        <ion-card>
+          <ion-card-header>
+            点击复制资源链接(先锋影音直接播放)
+          </ion-card-header>
+        </ion-card>
+        <div padding>
+          <ion-segment [(ngModel)]="resources_source">
+            <ion-segment-button *ngFor="let items of resources;let i = index;" [value]="i.toString()">
+              来源{{i}}
+            </ion-segment-button>
+            <ion-segment-button disabled="disabled">
+              预留
+            </ion-segment-button>
+          </ion-segment>
+        </div>
+        <div *ngFor="let resource of resources[resources_source];">
+          <movie-resource [resource]="resource"></movie-resource>
+        </div>
       </div>
     </div>
   </div>

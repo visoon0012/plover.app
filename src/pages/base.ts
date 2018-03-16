@@ -83,6 +83,8 @@ export class Base {
           } else {
             // this.presentToast('您已经是最新版本了，不需要进行更新');
           }
+        }).catch(() => {
+          console.log('不在cordova环境中');
         });
       },
       error => {

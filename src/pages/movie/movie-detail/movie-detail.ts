@@ -12,6 +12,7 @@ import {Base} from '../../base';
 export class MovieDetailPage extends Base {
 
   douban_id = null;
+  page = 'info';
   item: any = {
     'images': {},
     'rating': {}

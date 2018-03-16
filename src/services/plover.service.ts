@@ -15,13 +15,12 @@ export class PloverService {
     'processing_index': 'spider/movie/processing/index/',
     'processing_detail': 'spider/movie/processing/detail/',
     // movie
+    'movie_simple_mark': 'movie_simple_mark/',
     'movie_simple': 'movie_simple/',
     'movie_simple_image': 'movie_simple/image/',
     'movie_simple_spider': 'movie_simple/spider/',
-
     'movie': 'movie/',
     'movie_detail': 'movie/detail/',
-
     'movie_resource': 'movie_resource/',
     // poem
     'getPoemsRandom': 'poem/random/',
