@@ -2,7 +2,7 @@
   <ion-card-content (click)="copy(resource['download_link'])">
     <p *ngIf="resource['title']">{{resource['title']}}</p>
     <hr>
-    <p *ngIf="resource['name']">{{resource['name']}}</p>
+    <p *ngIf="resource['download_link']">{{resource['download_link']}}</p>
     <!-- <hr> -->
     <!-- <p *ngIf="resource['download_link']">{{resource['download_link']}}</p> -->
   </ion-card-content>

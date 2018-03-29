@@ -2,12 +2,6 @@ import {Component} from '@angular/core';
 import {IonicPage} from 'ionic-angular';
 import {Base} from '../../base';
 
-/**
- * Generated class for the UserRegisterPage page.
- *
- * See httservice://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({

@@ -1,10 +1,8 @@
 <ion-header>
+  <ion-navbar>
+    <ion-title>搜索</ion-title>
+  </ion-navbar>
   <ion-toolbar>
-    <!-- <ion-buttons start>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-    </ion-buttons> -->
     <ion-segment [(ngModel)]="page">
       <ion-segment-button value="new" (click)="getNew()">
         最新资源
@@ -13,18 +11,9 @@
         影片
       </ion-segment-button>
       <ion-segment-button value="resource">
-        搜索
+        资源
       </ion-segment-button>
     </ion-segment>
-  </ion-toolbar>
-  <ion-toolbar>
-    <ion-searchbar color="primary"
-                   (ionInput)="search($event)"
-                   (ionCancel)="onCancel($event)"
-                   debounce="3000"
-                   placeholder="输入后3秒执行搜索"
-                   [(ngModel)]="keywords">
-    </ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
@@ -64,3 +53,15 @@
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
+<ion-footer no-border *ngIf="page!='new'">
+  <ion-toolbar>
+    <div class="row">
+      <div col-8>
+        <ion-input placeholder="搜索关键字" clearInput [(ngModel)]="keywords" (keyup.enter)="onSearch()"></ion-input>
+      </div>
+      <div col-4>
+        <button ion-button small block (click)="onSearch()">搜索</button>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>

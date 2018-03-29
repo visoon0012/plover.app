@@ -5,11 +5,11 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-    <!-- <ion-buttons end>
-      <button ion-button (click)="goSearch()">
+    <ion-buttons end>
+      <button ion-button navPush="MovieSearchPage">
         <ion-icon name="search"></ion-icon>
       </button>
-    </ion-buttons> -->
+    </ion-buttons>
     <ion-segment [(ngModel)]="config.type">
       <ion-segment-button value="movie" (click)="changeType('movie')">
         电影

@@ -73,8 +73,8 @@ export class Base {
               buttons: [
                 {
                   text: '确定',
-                  handler: data => {
-                    const browser = this.iab.create('http://www.plover.cloud/plover.apk', '_system');
+                  handler: message => {
+                    const browser = this.iab.create(data['url'], '_system');
                   }
                 }
               ]
@@ -136,7 +136,9 @@ export class Base {
   presentToast(str) {
     let toast = this.toastCtrl.create({
       message: str,
-      duration: 3000
+      duration: 3000,
+      showCloseButton: true,
+      closeButtonText: "关闭",
     });
     toast.present();
   }

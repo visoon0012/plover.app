@@ -34,7 +34,7 @@ export class MovieSearchPage extends Base {
     this.getNew();
   }
 
-  search(ev: any) {
+  onSearch(ev: any) {
     if (this.page == 'new') {
       this.presentToast('最新资源不支持搜索');
       return;
@@ -59,6 +59,9 @@ export class MovieSearchPage extends Base {
     }
     else if (this.page == 'bt') {
     }
+  }
+
+  onCancel(ev: any) {
   }
 
   getMovies() {

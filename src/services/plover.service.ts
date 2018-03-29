@@ -11,6 +11,7 @@ export class PloverService {
     'refresh': 'token/refresh/',
     'verify': 'token/verify/',
     'user': 'user/',
+    'user_forgot': 'user/forgot/',
     // spider
     'processing_index': 'spider/movie/processing/index/',
     'processing_detail': 'spider/movie/processing/detail/',

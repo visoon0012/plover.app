@@ -2,12 +2,6 @@ import {Component} from '@angular/core';
 import {IonicPage} from 'ionic-angular';
 import {Base} from '../../base';
 
-/**
- * Generated class for the UserForgotPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -17,14 +11,14 @@ import {Base} from '../../base';
 export class UserForgotPage extends Base {
 
   public forgotData = {
-    phone: '',
+    username: '',
     password: '',
     email: ''
   };
 
   forgot() {
-    if (this.forgotData.phone == '') {
-      this.presentToast('手机号不能为空');
+    if (this.forgotData.username == '') {
+      this.presentToast('用户名不能为空');
       return;
     }
     if (this.forgotData.password == '') {
@@ -36,16 +30,17 @@ export class UserForgotPage extends Base {
       return;
     }
     this.showLoading('正在重置密码，请稍后...');
-    // this.ps.http.post(this.forgotData).subscribe(
-    //   data => {
-    //     this.hideLoading();
-    //     this.showToast(data['message']);
-    //     this.goLogin();
-    //   },
-    //   error => {
-    //     this.hideLoading();
-    //     this.showToast(error._body);
-    //   });
+    let url = this.service.api.user_forgot;
+    this.service.http.put(url, this.forgotData).subscribe(
+      data => {
+        this.hideLoading();
+        this.presentToast('密码已重置，请用新密码登录');
+        this.goLogin();
+      },
+      error => {
+        this.hideLoading();
+        this.handleError(error);
+      });
   }
 
   goRegister() {

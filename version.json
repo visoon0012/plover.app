@@ -1,4 +1,5 @@
 {
-  "message": "重要更新：优化详情页资源展示，以及搜索，主要是我把接口变了！",
-  "VersionCode": 20180313
+  "message": "重要更新：找回密码BUG FIX",
+  "VersionCode": 20180329,
+  "url": "http://www.plover.cloud/plover.apk"
 }

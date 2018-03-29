@@ -2,12 +2,6 @@ import {Component} from '@angular/core';
 import {IonicPage} from 'ionic-angular';
 import {Base} from '../../base';
 
-/**
- * Generated class for the UserLoginPage page.
- *
- * See httservice://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -31,7 +25,7 @@ export class UserLoginPage extends Base {
         this.hideLoading();
         localStorage['token'] = data['token'];
         localStorage['user'] = JSON.stringify(data['user']);
-        this.navCtrl.popTo('UserCenterPage');
+        this.navCtrl.popAll();
       },
       error => {
         this.hideLoading();
