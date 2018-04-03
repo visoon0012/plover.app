@@ -58,7 +58,7 @@ export class MovieDetailPage extends Base {
     comment: '',
     is_fork: false,
     is_like: false,
-    is_watch: false,
+    is_watched: false,
   };
 
   first_comment = false;
@@ -88,17 +88,25 @@ export class MovieDetailPage extends Base {
 
   save(type) {
     let url = this.service.api.movie_simple_mark;
+    this.mark['movie_simple'] = this.movie_simple['id'];
     if (type == 'comment') {
       if (this.mark.comment == '') {
         this.presentToast('请您写下评论');
         return;
       }
+    } else {
+      this.mark[type] = true;
     }
+    this.showLoading('正在保存...');
     this.service.http.post(url, this.mark).subscribe(
       result => {
+        this.hideLoading();
         this.getUserMark();
+        this.movie_mark_list = [];
+        this.getMovieMarkList();
       },
       error => {
+        this.hideLoading();
         this.handleError(error);
       }
     );
@@ -120,7 +128,7 @@ export class MovieDetailPage extends Base {
       url = this.movie_mark_data.next;
       this.movie_mark_data.next = null;
     }
-    this.service.http.get(url).subscribe(
+    this.service.http.get(url, {params: {movie_simple__douban_id: this.movie_simple.douban_id}}).subscribe(
       result => {
         this.movie_mark_data = result;
         this.movie_mark_list = this.movie_mark_list.concat(result['results']);

@@ -1,9 +1,15 @@
 <ion-card>
-  <ion-card-content (click)="copy(resource['download_link'])">
-    <p *ngIf="resource['title']">{{resource['title']}}</p>
-    <hr>
-    <p *ngIf="resource['download_link']">{{resource['download_link']}}</p>
-    <!-- <hr> -->
-    <!-- <p *ngIf="resource['download_link']">{{resource['download_link']}}</p> -->
-  </ion-card-content>
+  <ion-card-header>
+    点击复制资源链接(先锋影音直接播放)
+  </ion-card-header>
+  <ion-list>
+    <button class="button-border-top"
+            ion-item
+            *ngFor="let resource of resources"
+            (click)="copy(resource['download_link'])">
+      <p *ngIf="resource['title']">{{resource['title']}}</p>
+      <p *ngIf="resource['name'].length>10">{{resource['name']}}</p>
+      <p *ngIf="resource['name'].length<=10">{{resource['download_link']}}</p>
+    </button>
+  </ion-list>
 </ion-card>

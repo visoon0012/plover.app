@@ -26,6 +26,11 @@ export class PloverService {
     // poem
     'getPoemsRandom': 'poem/random/',
     'getPoems': 'poem/',
+    // system
+    'system_ss': 'system_ss/',
+    'system_ss_config': 'system_ss/${id}/config/',
+    'system_ss_restart': 'system_ss/${id}/restart/',
+    'system_ss_user_servers': 'system_ss/user_servers',
   };
 
   constructor(public http: HttpClient) {

@@ -1,0 +1,45 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>SS服务器</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-card>
+    <ion-card-header>
+      我的服务器
+    </ion-card-header>
+    <ion-list>
+      <button class="button-border-top" ion-item *ngFor="let item of my_servers" navPush="SystemSsDetailPage"
+              [navParams]="item">
+        <p>{{item['system_ip']}}</p>
+        <p>{{item['ss_port']}}</p>
+        <p>{{item['ss_pass']}}</p>
+      </button>
+    </ion-list>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      共享的服务器
+    </ion-card-header>
+    <ion-list>
+      <button class="button-border-top" ion-item *ngFor="let item of share_servers" (click)="copy_ss_link(item)">
+        <p>感谢: {{item['user_obj']['username']}} 分享</p>
+        <p>服务器: {{item['system_ip']}}</p>
+        <p>远程端口: {{item['ss_port']}}</p>
+        <p>密码: {{item['ss_pass']}}</p>
+      </button>
+    </ion-list>
+  </ion-card>
+
+  <ion-fab right bottom>
+    <button ion-fab mini navPush="SystemSsDetailPage">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {Base} from "../../base";
 
 
 @IonicPage()
@@ -7,13 +8,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   selector: 'page-message-list',
   templateUrl: 'message-list.html',
 })
-export class MessageListPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MessageListPage');
-  }
+export class MessageListPage extends Base {
 
 }

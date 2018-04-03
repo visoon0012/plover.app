@@ -23,7 +23,7 @@ export class UserLoginPage extends Base {
     this.service.http.post(this.service.api.auth, this.loginData).subscribe(
       data => {
         this.hideLoading();
-        localStorage['token'] = data['token'];
+        localStorage['token'] = 'JWT ' + data['token'];
         localStorage['user'] = JSON.stringify(data['user']);
         this.navCtrl.popAll();
       },

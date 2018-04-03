@@ -21,7 +21,7 @@ export class MovieSearchPage extends Base {
   };
   resource_new = {
     items: [],
-    next: '',
+    next: null,
   };
 
   bt_list: any = [];
@@ -35,11 +35,8 @@ export class MovieSearchPage extends Base {
   }
 
   onSearch(ev: any) {
-    if (this.page == 'new') {
-      this.presentToast('最新资源不支持搜索');
-      return;
-    }
     if (this.keywords == '') {
+      this.presentToast('请输入关键字，多个关键字用空格区分');
       return;
     }
     this.showLoading('正在加载中...');
@@ -59,9 +56,6 @@ export class MovieSearchPage extends Base {
     }
     else if (this.page == 'bt') {
     }
-  }
-
-  onCancel(ev: any) {
   }
 
   getMovies() {
@@ -134,10 +128,9 @@ export class MovieSearchPage extends Base {
 
   getNew() {
     let url = '';
-    if (this.resource_new.next == '') {
+    if (this.resource_new.next == null) {
       url = this.service.api.movie_resource;
-    }
-    else {
+    } else {
       url = this.resource_new.next;
     }
     this.service.http.get(url).subscribe(

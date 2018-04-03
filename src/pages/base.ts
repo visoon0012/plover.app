@@ -75,6 +75,7 @@ export class Base {
                   text: '确定',
                   handler: message => {
                     const browser = this.iab.create(data['url'], '_system');
+                    browser.close();
                   }
                 }
               ]
@@ -130,6 +131,7 @@ export class Base {
   hideLoading() {
     if (this.loading != null) {
       this.loading.dismiss();
+      this.loading = null;
     }
   }
 
@@ -161,6 +163,8 @@ export class Base {
       modal.onDidDismiss(data => {
       });
       modal.present();
+    } else if (error.status == 403) {
+      this.presentToast('您没有执行该操作的权限');
     } else {
       this.showAlert('警告', '无法确认的错误，请检查网络');
     }

@@ -19,9 +19,11 @@
 
 <ion-content class="app-bg">
   <div *ngIf="page=='new'">
-    <div *ngFor="let item of resource_new.items">
-      <movie-resource [resource]='item'></movie-resource>
-    </div>
+    <movie-resource [resources]="resource_new.items"></movie-resource>
+    <!--上拉加载-->
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="resource_new.next!=null">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </div>
   <div *ngIf="page=='movie'">
     <ion-card>
@@ -37,6 +39,10 @@
         <ion-col col-6 id="ion-col-width" *ngIf="imgSize.width==0"></ion-col>
       </ion-row>
     </ion-grid>
+    <!--上拉加载-->
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="movies.next!=null">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </div>
   <div *ngIf="page=='resource'">
     <ion-card>
@@ -44,14 +50,12 @@
         <p>共 {{resources['count']||0}} 条</p>
       </ion-card-content>
     </ion-card>
-    <div *ngFor="let item of this.resources['results']">
-      <movie-resource [resource]='item'></movie-resource>
-    </div>
+    <movie-resource [resources]="resources.results"></movie-resource>
+    <!--上拉加载-->
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="resources.next!=null">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </div>
-  <!--上拉加载-->
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-    <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
 </ion-content>
 <ion-footer no-border *ngIf="page!='new'">
   <ion-toolbar>

@@ -41,7 +41,7 @@ export class UserRegisterPage extends Base {
     this.service.http.post(this.service.api.user, this.registerData).subscribe(
       data => {
         this.hideLoading();
-        localStorage['token'] = data['token'];
+        localStorage['token'] = 'JWT ' + data['token'];
         this.goLogin();
       },
       error => {

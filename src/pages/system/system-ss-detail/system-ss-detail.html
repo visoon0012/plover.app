@@ -1,0 +1,108 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>添加与配置SS</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-card>
+    <ion-card-header>
+      1. 填写服务器信息(推荐ubuntu17.10)
+    </ion-card-header>
+    <ion-list>
+      <ion-item class="button-border-top">
+        <ion-label stacked>服务器IP</ion-label>
+        <ion-input type="text" [(ngModel)]="ss.system_ip"></ion-input>
+      </ion-item>
+      <ion-item class="button-border-top">
+        <ion-label stacked>服务器用户名</ion-label>
+        <ion-input type="text" [(ngModel)]="ss.system_name"></ion-input>
+      </ion-item>
+      <ion-item class="button-border-top">
+        <ion-label stacked>服务器密码</ion-label>
+        <ion-input type="text" [(ngModel)]="ss.system_pass"></ion-input>
+      </ion-item>
+      <ion-item class="button-border-top">
+        <ion-label stacked>SS端口(默认8388)</ion-label>
+        <ion-input type="number" [(ngModel)]="ss.ss_port" min="0"></ion-input>
+      </ion-item>
+      <ion-item class="button-border-top">
+        <ion-label stacked>SS密码(默认plover.cloud)</ion-label>
+        <ion-input type="text" [(ngModel)]="ss.ss_pass"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left clear small (click)="save_ss()">
+          <ion-icon name="cloud-upload-outline"></ion-icon>
+          <div>保存(已配置好的)</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <ion-icon name="arrow-round-forward"></ion-icon>
+          <div>下一步(2)</div>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      2. 自动配置服务器
+    </ion-card-header>
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left clear small (click)="config_ss()">
+          <ion-icon name="cloud-download-outline"></ion-icon>
+          <div>一键配置</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <ion-icon name="arrow-round-forward"></ion-icon>
+          <div>下一步(3)</div>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      3. 启动或重启SS
+    </ion-card-header>
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left clear small (click)="restart_ss()">
+          <ion-icon name="refresh"></ion-icon>
+          <div>启动与重启SS</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small (click)="delete_ss()">
+          <ion-icon name="trash"></ion-icon>
+          <div>删除该SS</div>
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left clear small (click)="share_ss()">
+          <ion-icon name="share-alt"></ion-icon>
+          <div>共享SS</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small (click)="copy_ss_link()">
+          <ion-icon name="share-alt"></ion-icon>
+          <div>复制快捷SS链接</div>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+</ion-content>

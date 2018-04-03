@@ -56,7 +56,7 @@
               <ion-col>
                 <button ion-button icon-left clear small>
                   <ion-icon name="play"></ion-icon>
-                  <div>{{resources.length}} 资源来源</div>
+                  <div *ngIf="movie_simple['resources']">{{movie_simple['resources'].length}} 资源</div>
                 </button>
               </ion-col>
             </ion-row>
@@ -72,21 +72,21 @@
           </ion-card-content>
           <ion-row>
             <ion-col>
-              <button ion-button icon-left clear small (click)="save('fork')">
+              <button ion-button icon-left clear small (click)="save('is_fork')">
                 <ion-icon [name]="mark.is_fork?'checkbox':'checkbox-outline'"></ion-icon>
-                <div>收藏</div>
+                <div>{{mark.is_fork?'已':''}}收藏</div>
               </button>
             </ion-col>
             <ion-col>
-              <button ion-button icon-left clear small (click)="save('watch')">
-                <ion-icon [name]="mark.is_watch?'eye':'eye-outline'"></ion-icon>
-                <div>已看</div>
+              <button ion-button icon-left clear small (click)="save('is_watched')">
+                <ion-icon [name]="mark.is_watched?'eye':'eye-outline'"></ion-icon>
+                <div>{{mark.is_watched?'已':''}}观看</div>
               </button>
             </ion-col>
             <ion-col>
-              <button ion-button icon-left clear small (click)="save('like')">
+              <button ion-button icon-left clear small (click)="save('is_like')">
                 <ion-icon [name]="mark.is_like?'heart':'heart-outline'"></ion-icon>
-                <div>喜欢</div>
+                <div>{{mark.is_like?'已':''}}喜欢</div>
               </button>
             </ion-col>
             <ion-col>
@@ -102,11 +102,12 @@
       <div class="movie-mark-list">
         <ion-card>
           <ion-card-header>
-            评论
+            动态
           </ion-card-header>
           <ion-list>
-            <button ion-item *ngFor="let item of movie_mark_list">
-              <h2>{{item.user.username}}</h2>
+            <button class="button-border-top" ion-item *ngFor="let item of movie_mark_list">
+              <p>{{item.user_obj.username}} {{item.is_fork?'已收藏':''}} {{item.is_watched?'已观看':''}}
+                {{item.is_like?'已喜欢':''}}</p>
               <p>{{item.comment}}</p>
             </button>
           </ion-list>
@@ -119,25 +120,20 @@
     </div>
     <div *ngIf="page=='resource'">
       <div *ngIf="resources.length > 0">
-        <ion-card>
-          <ion-card-header>
-            点击复制资源链接(先锋影音直接播放)
-          </ion-card-header>
-        </ion-card>
-        <div padding>
-          <ion-segment [(ngModel)]="resources_source">
-            <ion-segment-button *ngFor="let items of resources;let i = index;" [value]="i.toString()">
-              来源{{i}}
-            </ion-segment-button>
-            <ion-segment-button disabled="disabled">
-              预留
-            </ion-segment-button>
-          </ion-segment>
-        </div>
-        <div *ngFor="let resource of resources[resources_source];">
-          <movie-resource [resource]="resource"></movie-resource>
-        </div>
+        <movie-resource [resources]="resources[resources_source]"></movie-resource>
       </div>
     </div>
   </div>
 </ion-content>
+<ion-footer>
+  <ion-toolbar *ngIf="page=='resource' && resources.length > 0">
+    <ion-segment padding [(ngModel)]="resources_source">
+      <ion-segment-button *ngFor="let items of resources;let i = index;" [value]="i.toString()">
+        来源{{i}}
+      </ion-segment-button>
+      <ion-segment-button disabled="disabled">
+        预留
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer>
