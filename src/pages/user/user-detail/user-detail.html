@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>个人信息</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      {{user.username}} 的个人信息
+    </ion-card-header>
+    <ion-list>
+      <ion-item class="button-border-top">
+        <ion-label stacked>用户名</ion-label>
+        <ion-input type="text" [(ngModel)]="user.username" [disabled]="!is_owner"></ion-input>
+      </ion-item>
+      <ion-item class="button-border-top">
+        <ion-label stacked>昵称</ion-label>
+        <ion-input type="text" [(ngModel)]="user.nickname" [disabled]="!is_owner"></ion-input>
+      </ion-item>
+      <ion-item class="button-border-top">
+        <ion-label stacked>简介</ion-label>
+        <ion-input type="text" [(ngModel)]="user.introduction" [disabled]="!is_owner"></ion-input>
+      </ion-item>
+      <ion-item class="button-border-top">
+        <ion-label stacked>手机号</ion-label>
+        <ion-input type="text" [(ngModel)]="user.phone" [disabled]="!is_owner"></ion-input>
+      </ion-item>
+      <ion-item class="button-border-top">
+        <ion-label stacked>积分</ion-label>
+        <ion-input type="text" [(ngModel)]="user.score" [disabled]="!is_owner"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <ion-icon name="thumbs-up-outlilne"></ion-icon>
+          <div>赞一下</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <ion-icon name="thumbs-down-outlilne"></ion-icon>
+          <div>踩一下</div>
+        </button>
+      </ion-col>
+      <ion-col *ngIf="is_owner">
+        <button ion-button icon-left clear small (click)="save_user()">
+          <ion-icon name="cloud-upload-outline"></ion-icon>
+          <div>保存</div>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+</ion-content>

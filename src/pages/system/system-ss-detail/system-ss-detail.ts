@@ -22,7 +22,6 @@ export class SystemSsDetailPage extends Base {
     if (this.navParams.data.id) {
       this.ss = this.navParams.data;
     }
-    console.log(this.ss);
   }
 
   save_ss() {
