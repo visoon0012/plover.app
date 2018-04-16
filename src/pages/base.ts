@@ -89,7 +89,6 @@ export class Base {
         });
       },
       error => {
-        this.presentToast('发生错误');
       }
     );
   }

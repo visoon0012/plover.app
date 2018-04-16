@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>小说</ion-title>
+    <ion-buttons end>
+      <button ion-button navPush="NovelSearchPage">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!--用户收藏的书-->
+  <div *ngIf="user_novel_forks['count']">
+    <ion-list>
+      <ion-list-header>
+        您的收藏
+      </ion-list-header>
+      <ion-item-sliding *ngFor="let item of user_novel_forks['results']">
+        <button ion-item navPush="NovelReadPage" [navParams]="item">
+          <ion-thumbnail item-start>
+            <img [src]="item['novel']['cover']">
+          </ion-thumbnail>
+          <h2>{{item['novel']['title']}}</h2>
+          <p *ngIf="item['read']">{{item['read']['title']}}</p>
+          <p *ngIf="item['novel']['new']">{{item['novel']['new']['title']}}</p>
+        </button>
+        <ion-item-options side="right">
+          <button ion-button color="danger" (click)="fork(item['novel'])">
+            <ion-icon name="undo-outline"></ion-icon>
+            取消收藏
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+  <!--已有的-->
+  <div *ngIf="novel_list['count']">
+    <ion-list>
+      <ion-list-header>
+        推荐小说
+      </ion-list-header>
+      <ion-item-sliding *ngFor="let item of novel_list['results']">
+        <button ion-item navPush="NovelSearchPage" [navParams]="item">
+          <ion-thumbnail item-start>
+            <img [src]="item['cover']">
+          </ion-thumbnail>
+          <h2>{{item['title']}}</h2>
+          <p>有 {{item['like_times']}} 人喜欢</p>
+          <p>有 {{item['dislike_times']}} 人不喜欢</p>
+          <p>有 {{item['forks']}} 人收藏</p>
+          <p *ngIf="item['new']">{{item['new']['title']}}</p>
+        </button>
+        <ion-item-options side="right">
+          <button ion-button color="secondary" (click)="fork(item)">
+            <ion-icon name="undo-outline"></ion-icon>
+            收藏
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+</ion-content>

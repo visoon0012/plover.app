@@ -1,10 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {
-  IonicPage,
-  Content
-} from 'ionic-angular';
-import {MovieDetailPage} from '../movie-detail/movie-detail';
-import {MovieSearchPage} from '../movie-search/movie-search';
+import {IonicPage, Content} from 'ionic-angular';
 import {Base} from "../../base";
 
 

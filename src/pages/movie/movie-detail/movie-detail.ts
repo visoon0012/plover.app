@@ -1,7 +1,5 @@
 import {Component} from '@angular/core';
-import {
-  IonicPage,
-} from 'ionic-angular';
+import {IonicPage} from 'ionic-angular';
 import {Base} from '../../base';
 
 @IonicPage()
@@ -13,17 +11,13 @@ export class MovieDetailPage extends Base {
 
   /************ 用户评论 ************/
   movie_simple: any = {};
-  page = 'info';
   item: any = {
     'images': {},
     'rating': {}
   };
-  resources: any = [];
-  resources_source = '0';
 
   ionViewDidLoad() {
     this.movie_simple = this.navParams.data;
-    this.resources = this.subResources(this.navParams.data.resources);
     this.getInfo();
     this.getUserMark();
     this.getMovieMarkList();
@@ -65,7 +59,7 @@ export class MovieDetailPage extends Base {
 
   getUserMark() {
     let url = this.service.api.movie_simple_mark;
-    let user = JSON.parse(localStorage['user']);
+    let user = JSON.parse(localStorage['user'] || '{}');
     this.service.http.get(url, {
       params: {
         user__id: user.id,

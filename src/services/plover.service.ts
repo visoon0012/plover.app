@@ -31,6 +31,17 @@ export class PloverService {
     'system_ss_config': 'system_ss/${id}/config/',
     'system_ss_restart': 'system_ss/${id}/restart/',
     'system_ss_user_servers': 'system_ss/user_servers',
+    // novel
+    'novel': 'novel/',
+    'novel_search': 'novel/search/',
+    'novel_chapter': 'novel_chapter/',
+    'novel_chapter_search': 'novel_chapter/search/',
+    'novel_chapter_read': 'novel_chapter/read/',
+    'novel_chapter_cache': 'novel_chapter/${id}/cache/',
+    'novel_chapter_chapters': 'novel_chapter/${id}/chapters/',
+    'novel_chapter_download': 'novel_chapter/${id}/download/',
+    'novel_fork': 'novel_fork/',
+    'novel_fork_fork': 'novel_fork/${id}/fork/',
   };
 
   constructor(public http: HttpClient) {

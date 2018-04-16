@@ -13,6 +13,7 @@ export class TabsPage {
   tab1Root = 'MovieListPage';
   tab2Root = 'MessageListPage';
   tab3Root = 'UserCenterPage';
+  tab4Root = 'NovelListPage';
 
 
   constructor(public navCtrl: NavController) {}

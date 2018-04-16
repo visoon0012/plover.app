@@ -4,136 +4,109 @@
       {{item['title']||'电影详情'}}
     </ion-title>
   </ion-navbar>
-  <ion-toolbar>
-    <ion-segment padding [(ngModel)]="page">
-      <ion-segment-button value="info">
-        简介
-      </ion-segment-button>
-      <ion-segment-button value="resource">
-        资源
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar>
 </ion-header>
 
 <ion-content class="app-bg">
   <div *ngIf="item">
-    <div *ngIf="page=='info'">
-      <div class="movie-detail">
-        <div>
-          <div class="app-bg-block-details">
-            <img [src]="movie_simple['cover']"/>
-          </div>
-          <div class="app-bg-block-details-block">
-          </div>
+    <div class="movie-detail">
+      <div>
+        <div class="app-bg-block-details">
+          <img [src]="movie_simple['cover']"/>
         </div>
-        <div class="introduce">
-          <div class="app-details-card-img">
-            <img [src]="movie_simple['cover']"/>
-          </div>
-          <ion-card class="app-details-card">
-            <ion-card-header (click)="syncInfo()">
-              {{item['title']}}
-            </ion-card-header>
-            <ion-list>
-              <ion-card-content class="padding-vertical">
-                <p>{{item['summary']}}</p>
-              </ion-card-content>
-            </ion-list>
-            <ion-row>
-              <ion-col>
-                <button ion-button icon-left clear small>
-                  <ion-icon name="heart"></ion-icon>
-                  <div>豆瓣{{item['rating']['average']}}分</div>
-                </button>
-              </ion-col>
-              <ion-col>
-                <button ion-button icon-left clear small>
-                  <ion-icon name="stats"></ion-icon>
-                  <div>{{item['ratings_count']}} 评</div>
-                </button>
-              </ion-col>
-              <ion-col>
-                <button ion-button icon-left clear small>
-                  <ion-icon name="play"></ion-icon>
-                  <div *ngIf="movie_simple['resources']">{{movie_simple['resources'].length}} 资源</div>
-                </button>
-              </ion-col>
-            </ion-row>
-          </ion-card>
+        <div class="app-bg-block-details-block">
         </div>
       </div>
-
-      <div class="movie-mark">
-        <ion-card>
-          <ion-card-content>
-            <ion-textarea rows="3" placeholder="在这里写下您的评论" [(ngModel)]="mark.comment">
-            </ion-textarea>
-          </ion-card-content>
+      <div class="introduce">
+        <div class="app-details-card-img">
+          <img [src]="movie_simple['cover']"/>
+        </div>
+        <ion-card class="app-details-card">
+          <ion-card-header (click)="syncInfo()">
+            {{item['title']}}
+          </ion-card-header>
+          <ion-list>
+            <ion-card-content class="padding-vertical">
+              <p>{{item['summary']}}</p>
+            </ion-card-content>
+          </ion-list>
           <ion-row>
             <ion-col>
-              <button ion-button icon-left clear small (click)="save('is_fork')">
-                <ion-icon [name]="mark.is_fork?'checkbox':'checkbox-outline'"></ion-icon>
-                <div>{{mark.is_fork?'已':''}}收藏</div>
+              <button ion-button icon-left clear small>
+                <ion-icon name="heart"></ion-icon>
+                <div>豆瓣{{item['rating']['average']}}分</div>
               </button>
             </ion-col>
             <ion-col>
-              <button ion-button icon-left clear small (click)="save('is_watched')">
-                <ion-icon [name]="mark.is_watched?'eye':'eye-outline'"></ion-icon>
-                <div>{{mark.is_watched?'已':''}}观看</div>
+              <button ion-button icon-left clear small>
+                <ion-icon name="stats"></ion-icon>
+                <div>{{item['ratings_count']}} 评</div>
               </button>
             </ion-col>
             <ion-col>
-              <button ion-button icon-left clear small (click)="save('is_like')">
-                <ion-icon [name]="mark.is_like?'heart':'heart-outline'"></ion-icon>
-                <div>{{mark.is_like?'已':''}}喜欢</div>
-              </button>
-            </ion-col>
-            <ion-col>
-              <button ion-button icon-left clear small (click)="save('comment')">
-                <ion-icon name="cloud-upload-outline"></ion-icon>
-                <div>保存</div>
+              <button ion-button icon-left clear small
+                      navPush="MovieResourcesPage"
+                      [navParams]="movie_simple['resources']">
+                <ion-icon name="cloud-download"></ion-icon>
+                <div *ngIf="movie_simple['resources']">{{movie_simple['resources'].length}} 资源</div>
               </button>
             </ion-col>
           </ion-row>
         </ion-card>
       </div>
-
-      <div class="movie-mark-list">
-        <ion-card>
-          <ion-card-header>
-            动态
-          </ion-card-header>
-          <ion-list>
-            <button class="button-border-top" ion-item *ngFor="let item of movie_mark_list">
-              <p>{{item.user_obj.username}} {{item.is_fork?'已收藏':''}} {{item.is_watched?'已观看':''}}
-                {{item.is_like?'已喜欢':''}}</p>
-              <p>{{item.comment}}</p>
-            </button>
-          </ion-list>
-        </ion-card>
-        <!--上拉加载-->
-        <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="movie_mark_data.next != null">
-          <ion-infinite-scroll-content></ion-infinite-scroll-content>
-        </ion-infinite-scroll>
-      </div>
     </div>
-    <div *ngIf="page=='resource'">
-      <div *ngIf="resources.length > 0">
-        <movie-resource [resources]="resources[resources_source]"></movie-resource>
-      </div>
+
+    <div class="movie-mark">
+      <ion-card>
+        <ion-card-content>
+          <ion-textarea rows="3" placeholder="在这里写下您的评论" [(ngModel)]="mark.comment">
+          </ion-textarea>
+        </ion-card-content>
+        <ion-row>
+          <ion-col>
+            <button ion-button icon-left clear small (click)="save('is_fork')">
+              <ion-icon [name]="mark.is_fork?'checkbox':'checkbox-outline'"></ion-icon>
+              <div>{{mark.is_fork?'已':''}}收藏</div>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button icon-left clear small (click)="save('is_watched')">
+              <ion-icon [name]="mark.is_watched?'eye':'eye-outline'"></ion-icon>
+              <div>{{mark.is_watched?'已':''}}观看</div>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button icon-left clear small (click)="save('is_like')">
+              <ion-icon [name]="mark.is_like?'heart':'heart-outline'"></ion-icon>
+              <div>{{mark.is_like?'已':''}}喜欢</div>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button icon-left clear small (click)="save('comment')">
+              <ion-icon name="cloud-upload-outline"></ion-icon>
+              <div>保存</div>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </div>
+
+    <div class="movie-mark-list">
+      <ion-card>
+        <ion-card-header>
+          动态
+        </ion-card-header>
+        <ion-list>
+          <button class="button-border-top" ion-item *ngFor="let item of movie_mark_list">
+            <p>{{item.user_obj.username}} {{item.is_fork?'已收藏':''}} {{item.is_watched?'已观看':''}}
+              {{item.is_like?'已喜欢':''}}</p>
+            <p>{{item.comment}}</p>
+          </button>
+        </ion-list>
+      </ion-card>
+      <!--上拉加载-->
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="movie_mark_data.next != null">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
     </div>
   </div>
 </ion-content>
-<ion-footer>
-  <ion-toolbar *ngIf="page=='resource' && resources.length > 0">
-    <ion-segment padding [(ngModel)]="resources_source">
-      <ion-segment-button *ngFor="let items of resources;let i = index;" [value]="i.toString()">
-        来源{{i}}
-      </ion-segment-button>
-      <ion-segment-button disabled="disabled">
-        预留
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar>
-</ion-footer>

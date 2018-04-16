@@ -2,13 +2,16 @@ import {NgModule} from '@angular/core';
 import {IonicModule} from 'ionic-angular';
 import {MovieCardComponent} from './movie-card/movie-card';
 import {MovieResourceComponent} from './movie-resource/movie-resource';
+import { NovelCardComponent } from './novel-card/novel-card';
 
 @NgModule({
   declarations: [MovieCardComponent,
-    MovieResourceComponent,],
+    MovieResourceComponent,
+    NovelCardComponent,],
   imports: [IonicModule],
   exports: [MovieCardComponent,
-    MovieResourceComponent,]
+    MovieResourceComponent,
+    NovelCardComponent,]
 })
 export class ComponentsModule {
 }

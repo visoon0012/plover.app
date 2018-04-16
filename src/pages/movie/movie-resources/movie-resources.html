@@ -1,0 +1,26 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>资源下载</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div *ngIf="resources.length > 0">
+    <movie-resource [resources]="resources[resources_source]"></movie-resource>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar *ngIf="resources.length > 0">
+    <ion-segment padding [(ngModel)]="resources_source">
+      <ion-segment-button *ngFor="let items of resources;let i = index;" [value]="i.toString()">
+        来源{{i}}
+      </ion-segment-button>
+      <ion-segment-button disabled="disabled">
+        预留
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer>

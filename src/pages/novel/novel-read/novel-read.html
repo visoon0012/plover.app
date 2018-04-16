@@ -1,0 +1,65 @@
+<ion-header *ngIf="show">
+  <ion-toolbar>
+    <ion-buttons start>
+      <button ion-button icon-only navPop>
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{data['title']}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="help()">
+        <ion-icon name="help-circle-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="background-color: #bbad8f">
+  <!--上一页-->
+  <div padding *ngIf="data['content'] && page=='content'">
+    <button ion-button block outline color="dark" (click)="getContentLast()">上一章</button>
+  </div>
+  <!--正文-->
+  <div id="NovelContent" *ngIf="page=='content'" (click)="toggleFooter()">
+    <p style="padding: 15px;" [ngStyle]="{
+    'font-size': style.fontSize+'px',
+    'line-height': style.lineHeight+'px'
+    }">
+      {{data['content']}}
+    </p>
+  </div>
+  <!--目录-->
+  <div *ngIf="page=='chapters'">
+
+    <ion-list>
+      <ion-list-header>
+      </ion-list-header>
+      <button ion-item class="button-border-top" *ngFor="let item of chapters" (click)="getContentCurrent(item)">
+        {{item['title']}}
+      </button>
+      <button ion-item class="button-border-top">
+        暂无更多
+      </button>
+    </ion-list>
+  </div>
+  <!--下一页-->
+  <div padding *ngIf="data['content'] && page=='content'">
+    <button ion-button block outline color="dark" (click)="getContentNext()">下一章</button>
+  </div>
+</ion-content>
+<ion-footer *ngIf="show">
+  <ion-toolbar>
+    <ion-buttons start>
+      <!--<button ion-button outline>上一章</button>-->
+      <button ion-button outline (click)="showChapters()">目录</button>
+      <button ion-button outline>设置</button>
+    </ion-buttons>
+    <ion-title></ion-title>
+    <ion-buttons end>
+      <button ion-button outline>
+        夜间
+      </button>
+      <!--<button ion-button outline>下一章</button>-->
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,26 @@
+<ion-card no-padding no-margin navPush="NovelDetailPage" [navParams]="item">
+  <img [src]="item['cover']">
+  <ion-card-content>
+    <p class="line-height">{{item['title']}}</p>
+  </ion-card-content>
+  <ion-row>
+    <ion-col>
+      <button ion-button icon-left clear small>
+        <ion-icon name="thumbs-up-outline"></ion-icon>
+        <div>{{novel['like_times']}} 赞</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button icon-left clear small>
+        <ion-icon name="thumbs-down-outline"></ion-icon>
+        <div>{{novel['dislike_times']}} 踩</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button icon-left clear small (click)="fork()">
+        <ion-icon name="bookmarks-outline"></ion-icon>
+        <div>{{novel['forks']}} 收藏</div>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-card>
