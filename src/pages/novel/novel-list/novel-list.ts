@@ -24,8 +24,9 @@ export class NovelListPage extends Base {
     if (!token) {
       return;
     }
+    let user = JSON.parse(localStorage['user']);
     let url = this.service.api.novel_fork;
-    this.service.http.get(url, {params: {}}).subscribe(
+    this.service.http.get(url, {params: {user__id: user['id']}}).subscribe(
       result => {
         this.user_novel_forks = result;
       },
@@ -61,5 +62,15 @@ export class NovelListPage extends Base {
         this.handleError(error);
       }
     );
+  }
+
+
+  // 下拉刷新
+  doRefresh(refresher) {
+    this.getUserNovelForks();
+    this.getNovelForks();
+    setTimeout(() => {
+      refresher.complete();
+    }, 3000);
   }
 }

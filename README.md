@@ -28,6 +28,7 @@
     其他：plovercloud
     密码：plovercloud.com
 
+
 ## 生成新的页面/指令等
 
     ionic generate pipes, components, pages, directives, providers, and tabs

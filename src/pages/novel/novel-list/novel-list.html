@@ -10,6 +10,11 @@
 </ion-header>
 
 <ion-content>
+  <!--下拉刷新-->
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingText="立即刷新" refreshingSpinner="circles" refreshingText="正在刷新数据...">
+    </ion-refresher-content>
+  </ion-refresher>
   <!--用户收藏的书-->
   <div *ngIf="user_novel_forks['count']">
     <ion-list>

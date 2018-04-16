@@ -107,7 +107,8 @@ export class NovelReadPage extends Base {
     this.showLoading('正在加载中...');
     // 如果没读过，写第0章
     if (!this.item['read']) {
-      this.item['read'] = 0;
+      this.item['read'] = {};
+      this.item['read']['id'] = 0;
     }
     // 获取当章内容
     let url = this.service.api.novel_chapter_read;
