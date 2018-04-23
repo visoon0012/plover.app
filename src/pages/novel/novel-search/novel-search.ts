@@ -45,6 +45,7 @@ export class NovelSearchPage extends Base {
       result => {
         this.hideLoading();
         this.presentToast(result['success']);
+        this.cache();
       },
       error => {
         this.hideLoading();
@@ -53,6 +54,18 @@ export class NovelSearchPage extends Base {
     );
   }
 
-  showChapters() {
+  cache() {
+    this.showLoading('正在缓存目录中...');
+    let url = this.service.api.novel_chapter_cache.replace('${id}', this.novel['id']);
+    this.service.http.get(url).subscribe(
+      result => {
+        this.hideLoading();
+        this.presentToast(result['success']);
+      },
+      error => {
+        this.hideLoading();
+        this.handleError(error);
+      }
+    );
   }
 }

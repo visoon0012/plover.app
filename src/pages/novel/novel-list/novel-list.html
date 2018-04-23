@@ -22,7 +22,7 @@
         您的收藏
       </ion-list-header>
       <ion-item-sliding *ngFor="let item of user_novel_forks['results']">
-        <button ion-item navPush="NovelReadPage" [navParams]="item">
+        <button ion-item navPush="NovelReadPage" [navParams]="item['read']">
           <ion-thumbnail item-start>
             <img [src]="item['novel']['cover']">
           </ion-thumbnail>

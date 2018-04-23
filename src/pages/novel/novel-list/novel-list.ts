@@ -10,8 +10,9 @@ import {Base} from "../../base";
 export class NovelListPage extends Base {
   user_novel_forks = {};
   novel_list = {};
+  items = [];
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this.getUserNovelForks();
     this.getNovelForks();
   }

@@ -17,7 +17,16 @@
 <ion-content style="background-color: #bbad8f">
   <!--上一页-->
   <div padding *ngIf="data['content'] && page=='content'">
-    <button ion-button block outline color="dark" (click)="getContentLast()">上一章</button>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6>
+          <button ion-button block outline color="dark" (click)="getContent(false,true)">上一章</button>
+        </ion-col>
+        <ion-col col-6>
+          <button ion-button block outline color="dark" (click)="getContent(true,false)">下一章</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
   <!--正文-->
   <div id="NovelContent" *ngIf="page=='content'" (click)="toggleFooter()">
@@ -28,23 +37,18 @@
       {{data['content']}}
     </p>
   </div>
-  <!--目录-->
-  <div *ngIf="page=='chapters'">
-
-    <ion-list>
-      <ion-list-header>
-      </ion-list-header>
-      <button ion-item class="button-border-top" *ngFor="let item of chapters" (click)="getContentCurrent(item)">
-        {{item['title']}}
-      </button>
-      <button ion-item class="button-border-top">
-        暂无更多
-      </button>
-    </ion-list>
-  </div>
   <!--下一页-->
   <div padding *ngIf="data['content'] && page=='content'">
-    <button ion-button block outline color="dark" (click)="getContentNext()">下一章</button>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6>
+          <button ion-button block outline color="dark" (click)="getContent(false,true)">上一章</button>
+        </ion-col>
+        <ion-col col-6>
+          <button ion-button block outline color="dark" (click)="getContent(true,false)">下一章</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
 </ion-content>
 <ion-footer *ngIf="show">

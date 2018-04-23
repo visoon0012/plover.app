@@ -1,0 +1,18 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>章节列表</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list [virtualScroll]="chapters">
+
+    <button ion-item *virtualItem="let chapter" (click)="selectChapter(chapter)">
+      {{ chapter['title'] }}
+    </button>
+
+  </ion-list>
+</ion-content>

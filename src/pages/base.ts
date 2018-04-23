@@ -5,7 +5,7 @@ import {
   ToastController,
   NavParams,
   ModalController,
-  LoadingController
+  LoadingController, ViewController
 } from 'ionic-angular';
 import {Clipboard} from '@ionic-native/clipboard';
 import {AppVersion} from '@ionic-native/app-version';
@@ -27,6 +27,7 @@ export class Base {
               public toastCtrl: ToastController,
               public navCtrl: NavController,
               public modalCtrl: ModalController,
+              public viewCtrl: ViewController,
               public clipboard: Clipboard,
               public appVersion: AppVersion,
               public iab: InAppBrowser,

@@ -1,6 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
 import {Content, IonicPage} from 'ionic-angular';
 import {Base} from "../../base";
+import {isUndefined} from "ionic-angular/util/util";
+import {NovelChaptersPage} from "../novel-chapters/novel-chapters";
 
 @IonicPage()
 @Component({
@@ -12,18 +14,18 @@ export class NovelReadPage extends Base {
   show = false;
   item = {};
   data = {};
-  chapters: any = [];
-  current_chapter_site;
-
   style = {
     fontSize: 18,
     lineHeight: 36,
   };
 
+
   ionViewDidLoad() {
     this.item = this.navParams.data;
-    this.getContent();
-    this.getChapters();
+    this.getContent(false, false);
+  }
+
+  ionViewWillEnter() {
   }
 
   help() {
@@ -34,100 +36,46 @@ export class NovelReadPage extends Base {
     this.show = !this.show;
   }
 
-  /**
-   * 获取章节目录
-   */
-  getChapters() {
-    let url = this.service.api.novel_chapter_chapters.replace('${id}', this.item['novel']['id']);
-    this.service.http.get(url).subscribe(
-      result => {
-        this.chapters = result;
-        this.getCurrentChapterSite();
-      },
-      error => {
-        this.handleError(error);
-      }
-    );
-  }
-
-  showChapters() {
-    this.page = 'chapters';
-  }
-
-  /**
-   * 获取当前章节所在章节列表的位置
-   */
-  getCurrentChapterSite() {
-    let read_id = this.item['read']['id'];
-    for (let i in this.chapters) {
-      let chapter = this.chapters[i];
-      if (chapter['id'] == read_id) {
-        this.current_chapter_site = parseInt(i);
-        break;
-      }
-    }
-  }
-
-  /**
-   * 获取上一章内容
-   */
-  getContentLast() {
-    if (this.current_chapter_site <= 0) {
-      this.presentToast('已经是第一章');
-      return;
-    }
-    this.current_chapter_site -= 1;
-    this.item['read'] = this.chapters[this.current_chapter_site];
-    this.getContent();
-  }
-
-  /**
-   * 获取下一章内容
-   */
-  getContentNext() {
-    if (this.current_chapter_site >= this.chapters.length) {
-      this.presentToast('已经是最后一章');
-      return;
-    }
-    this.current_chapter_site += 1;
-    this.item['read'] = this.chapters[this.current_chapter_site];
-    this.getContent();
-  }
-
-  /**
-   * 获取当前选择章
-   */
-  getContentCurrent(item) {
-    this.item['read'] = item;
-    this.getContent();
-    this.page = 'content';
-  }
-
-  getContent() {
+  getContent(next, last) {
     this.showLoading('正在加载中...');
-    // 如果没读过，写第0章
-    if (!this.item['read']) {
-      this.item['read'] = {};
-      this.item['read']['id'] = 0;
+    if (this.item == null || isUndefined(this.item)) {
+      this.item = {};
+      this.item['id'] = 0;
     }
     // 获取当章内容
     let url = this.service.api.novel_chapter_read;
     this.service.http.get(url, {
       params: {
-        read_id: this.item['read']['id'],
-        novel_id: this.item['novel']['id']
+        read_id: this.item['id'],
+        novel_id: this.item['novel'],
+        next: next,
+        last: last
       }
     }).subscribe(
       result => {
         this.hideLoading();
         this.data = result;
+        this.item = result;
         this.scrollToTop();
       },
       error => {
         this.hideLoading();
-        this.handleError(error);
+        this.showAlert('警告', '加载出错，请重试');
+        this.navCtrl.pop();
       }
     );
+  }
+
+  showChapters() {
+    let callback = (_params) => {
+      return new Promise((resolve, reject) => {
+        this.item = _params;
+        console.log(this.item);
+        this.getContent(false, false);
+        resolve();
+      });
+    };
+    this.navCtrl.push('NovelChaptersPage', {'read': this.item, 'callback': callback});
   }
 
 
