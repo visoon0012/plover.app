@@ -15,6 +15,14 @@ export class UserLoginPage extends Base {
     password: ''
   };
 
+  ionViewDidLoad() {
+    if (localStorage['openid']) {
+      this.loginData.username = 'WX' + localStorage['openid'];
+      this.loginData.password = localStorage['openid'];
+      this.login();
+    }
+  }
+
   /**
    * 登录
    */

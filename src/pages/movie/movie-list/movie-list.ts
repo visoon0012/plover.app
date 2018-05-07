@@ -132,14 +132,6 @@ export class MovieListPage extends Base {
     this.getInfo();
   }
 
-  goMovie(item) {
-    this.navCtrl.push('MovieDetailPage', item);
-  }
-
-  goSearch() {
-    this.navCtrl.push('MovieSearchPage');
-  }
-
   // 下拉刷新
   doRefresh(refresher) {
     this.list = [];
@@ -152,7 +144,9 @@ export class MovieListPage extends Base {
 
   // 上拉 加载
   doInfinite(ionInfinite) {
-    this.getMovieSimpleList();
+    if (this.config.next != '') {
+      this.getMovieSimpleList();
+    }
     setTimeout(() => {
       ionInfinite.complete();
     }, 3000);

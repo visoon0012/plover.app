@@ -29,6 +29,7 @@ export class UserDetailPage extends Base {
       result => {
         this.user = result;
         localStorage['user'] = JSON.stringify(this.user);
+        this.presentToast('个人信息更新成功');
       },
       error => {
         this.handleError(error);

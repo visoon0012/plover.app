@@ -1,6 +1,6 @@
 <ion-card>
   <ion-card-header>
-    点击复制资源链接(先锋影音直接播放)
+    点击复制资源链接(迅雷可能会屏蔽链接)
   </ion-card-header>
   <ion-list>
     <button class="button-border-top"
@@ -10,6 +10,7 @@
       <p *ngIf="resource['title']">{{resource['title']}}</p>
       <p *ngIf="resource['name'].length>10">{{resource['name']}}</p>
       <p *ngIf="resource['name'].length<=10">{{resource['download_link']}}</p>
+      <p>支持：迅雷下载 - {{resource['download_link'].indexOf('magnet:?xt=urn:btih:')==0?'先锋影音':''}}</p>
     </button>
   </ion-list>
 </ion-card>

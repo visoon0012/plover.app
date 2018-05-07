@@ -1,6 +1,5 @@
 // http://ionicframework.com/docs/theming/
 
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -16,4 +15,13 @@
 // automatically applied to the <body> element in the app.
 .card-ios {
   border-radius: 5px;
+}
+
+.button-border-top {
+  border-top: 0.55px solid #c8c7cc;
+  color: #8e9093;
+}
+
+.border-top {
+  border-top: 1px solid #c8c7cc;
 }

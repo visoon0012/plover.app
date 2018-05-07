@@ -23,6 +23,7 @@ import {InAppBrowser} from '@ionic-native/in-app-browser';
     IonicModule.forRoot(MyApp, {
       backButtonIcon: "ios-arrow-back",
       tabbarPlacement: 'bottom',
+      swipeBackEnabled: true,
       backButtonText: '返回',
       iconMode: 'ios',
       mode: 'ios',

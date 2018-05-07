@@ -8,28 +8,28 @@
 <ion-content>
   <ion-card>
     <ion-card-header>
-      {{user.username}} 的个人信息
+      {{user['nickname']||user['username']}} 的个人信息
     </ion-card-header>
     <ion-list>
-      <ion-item class="button-border-top">
+      <ion-item class="border-top">
         <ion-label stacked>用户名</ion-label>
-        <ion-input type="text" [(ngModel)]="user.username" [disabled]="!is_owner"></ion-input>
+        <ion-input type="text" [(ngModel)]="user['username']" [disabled]="true"></ion-input>
       </ion-item>
-      <ion-item class="button-border-top">
+      <ion-item class="border-top">
         <ion-label stacked>昵称</ion-label>
-        <ion-input type="text" [(ngModel)]="user.nickname" [disabled]="!is_owner"></ion-input>
+        <ion-input type="text" [(ngModel)]="user['nickname']" [disabled]="!is_owner"></ion-input>
       </ion-item>
-      <ion-item class="button-border-top">
+      <ion-item class="border-top">
         <ion-label stacked>简介</ion-label>
-        <ion-input type="text" [(ngModel)]="user.introduction" [disabled]="!is_owner"></ion-input>
+        <ion-input type="text" [(ngModel)]="user['introduction']" [disabled]="!is_owner"></ion-input>
       </ion-item>
-      <ion-item class="button-border-top">
+      <ion-item class="border-top">
         <ion-label stacked>手机号</ion-label>
-        <ion-input type="text" [(ngModel)]="user.phone" [disabled]="!is_owner"></ion-input>
+        <ion-input type="text" [(ngModel)]="user['phone']" [disabled]="!is_owner"></ion-input>
       </ion-item>
-      <ion-item class="button-border-top">
+      <ion-item class="border-top">
         <ion-label stacked>积分</ion-label>
-        <ion-input type="text" [(ngModel)]="user.score" [disabled]="!is_owner"></ion-input>
+        <ion-input type="text" [(ngModel)]="user['score']" [disabled]="true"></ion-input>
       </ion-item>
     </ion-list>
     <ion-row>

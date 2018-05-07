@@ -95,6 +95,20 @@ export class Base {
   }
 
   copy(str) {
+    // 浏览器复制功能
+    // let selBox = document.createElement('textarea');
+    // selBox.style.position = 'fixed';
+    // selBox.style.left = '0';
+    // selBox.style.top = '0';
+    // selBox.style.opacity = '0';
+    // selBox.value = val;
+    // document.body.appendChild(selBox);
+    // selBox.focus();
+    // selBox.select();
+    // document.execCommand('copy');
+    // document.body.removeChild(selBox);
+    // this.presentToast('已复制到粘贴板');
+    // 调用原生的复制功能
     this.clipboard.copy(str).then(data => {
       this.presentToast('复制成功');
     }).catch(error => {

@@ -8,5 +8,4 @@ import {Base} from "../../pages/base";
 export class MovieResourceComponent extends Base {
 
   @Input() resources: any;
-
 }
